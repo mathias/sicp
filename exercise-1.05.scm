@@ -2,12 +2,23 @@
 
 (define (p) (p))
 
-; in Normal-order evaluation, an invocation of (test 0 (p)) would loop
-; infinitely as the interpreter would evaluate the value of y before
-; evaluating the if statement. In applicative-order evaluation, the value
-; of y is never calculated if x is 0, so the (test 0 (p)) evaluates to 0.
-; Dr. Racket uses Normal-order evaluation, so the method will loop forever. 
 (define (test x y)
   (if (= x 0)
     0
     y))
+
+; What happens for the following code in normal-order and applicative-order
+; evaluations?
+;   (test 0 (p))
+;
+; For normal-order evaluation, the function will be applied before all of the
+; arguments are expanded, which allows the special form if to short circuit
+; the infinite loop calling (p) would cause.
+; The expansion and evaluation is along these lines:
+;   (if (= x 0) 0 (p))
+;   (if (#f) 0 (p))
+;   0 
+; (p) in normal-order remains unexpanded until its value is needed.
+;
+; In applicative-order evaluation, the values are expanded before the if
+; function is applied, causing p to continue to expand infinitely.
