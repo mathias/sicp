@@ -1,3 +1,23 @@
-.DS_Store
-*~
-*.swp
+## OSX ignores:
+
+.DS_Store?
+Icon?
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+## Textmate ignores:
+
+*.tmproj
+*.tmproject
+tmtags
+
+## Vim ignores:
+
+.*.sw[a-z]
+*.un~
+
